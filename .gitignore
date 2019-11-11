@@ -1,2 +1,7 @@
 .idea/
 venv/
+ProjektKurier/env/Include
+ProjektKurier/env/Lib
+ProjektKurier/env/Scripts
+ProjektKurier/env/tcl
+ProjektKurier/env/LICENSE.txt
