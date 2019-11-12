@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 
 def track(request):
-    return HttpResponse('<h1>Śledź paczkę!</h1>')
+    return render(request, 'trackparc/track.html')
