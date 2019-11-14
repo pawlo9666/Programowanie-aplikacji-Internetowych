@@ -1,0 +1,18 @@
+stawianie virtuala jakoś trzeba igarnąć żeby był w folderze env
+(prawdopodobnie będąc w katalogi ProjekKurier trezba walnąć takie komendy:)
+
+    pip install virtualenv
+
+    cd main-project
+    virtualenv env
+
+    \env\Scripts\activate.bat
+
+urucamianie pipa (instalacja zapisanych pakietów):
+    $pip install -r requirements.txt
+
+PhpMyAdmin:
+    bad.wum.edu.pl
+    L: Nazwisko+1Imienia
+    H: imie
+    (z małych)
