@@ -1,1 +1,0 @@
-#kłaniam się nisko aż po same kule
