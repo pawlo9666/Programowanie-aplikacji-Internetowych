@@ -2,7 +2,7 @@
  multiply, divide.'''
 
 class Calculator:
-    def __init__(sefl):
+    def __init__(self):
         pass
 
     def add(a, b):
@@ -14,7 +14,7 @@ class Calculator:
     def multiply(a, b):
         return a * b
 
-    def devide(a, b):
+    def divide(a, b):
         return a / b
 
 

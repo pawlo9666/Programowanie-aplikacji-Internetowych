@@ -3,7 +3,7 @@ stawianie virtuala jakoś trzeba igarnąć żeby był w folderze env
 
     pip install virtualenv
 
-    cd ProjektKurier
+    cd main-project
     virtualenv env
 
     \env\Scripts\activate.bat
