@@ -11,6 +11,7 @@ class Adres(models.Model):
     miasto = models.CharField(max_length=45)
     poczta = models.CharField(max_length=45)
 
+
     def __str__(self):
         return self.idAdres
 
