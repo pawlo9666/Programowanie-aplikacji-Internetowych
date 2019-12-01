@@ -6,8 +6,4 @@ admin.site.register(Klient)
 admin.site.register(DaneKlient)
 admin.site.register(Zlecenie)
 admin.site.register(Kierowcy)
-<<<<<<< HEAD
 admin.site.register(Przydzial)
-=======
-admin.site.register(Przydzial)
->>>>>>> master

@@ -1,6 +1,5 @@
 from django.db import models
-from django import forms
-
+from django.conf import settings
 
 class Adres(models.Model):
     idAdres = models.IntegerField(primary_key=True)
@@ -11,7 +10,6 @@ class Adres(models.Model):
     miasto = models.CharField(max_length=45)
     poczta = models.CharField(max_length=45)
 
-
     def __str__(self):
         return self.idAdres
 
@@ -19,24 +17,20 @@ class Adres(models.Model):
 class Klient(models.Model):
     idKlient = models.IntegerField(primary_key=True)
     idAdres = models.ForeignKey(Adres, on_delete=models.CASCADE)    # cascade zmienic
+    idUser = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)    # dodałem klucz obcy do kont tworzonych w django
 
     def __str__(self):
-        return self.idKlienta   # tutaj mozna chyba dodać jakoś fajnie żeby wywalałoz... nwm
+        return self.idKlient   # tutaj mozna chyba dodać jakoś fajnie żeby wywalałoz... nwm
 
 
 class DaneKlient(models.Model):
+    idDane = models.IntegerField(primary_key=True)
     idKlient = models.ForeignKey(Klient, on_delete=models.CASCADE)  #cascade zmienić
-    indiwid = "IND"
-    firmowy = "FIRM"
-    typ = [
-        (indiwid, 'Indywidualny'),
-        (firmowy, 'Firmowy')
-    ]
+    typ = models.CharField(max_length=200)
     email = models.EmailField(max_length=254)
     nazwa = models.CharField(max_length=200)
     nip = models.CharField(max_length=200)
     login = models.CharField(max_length=200)
-    haslo = forms.CharField(widget=forms.PasswordInput)    # to pewnie trezbabędzie poprawićżeby dodac jakieś
 
     def __str__(self):
         return self.nazwa
@@ -63,5 +57,6 @@ class Kierowcy(models.Model):
 
 
 class Przydzial(models.Model):
+    idPrzydzial = models.IntegerField(primary_key=True)
     idPaczka = models.ForeignKey(Zlecenie, on_delete=models.CASCADE)
     idKierowcy = models.ForeignKey(Kierowcy, on_delete=models.CASCADE)
