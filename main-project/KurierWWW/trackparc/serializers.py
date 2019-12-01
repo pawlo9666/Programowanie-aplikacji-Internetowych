@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-from rest_framework import serializers
-
-=======
 import re
 from rest_framework import serializers
 from .models import *
@@ -61,4 +57,3 @@ class PrzydzialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Przydzial
         fields = '__all__'
->>>>>>> master
