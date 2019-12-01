@@ -57,8 +57,3 @@ class PrzydzialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Przydzial
         fields = '__all__'
-
-
-
-
-
