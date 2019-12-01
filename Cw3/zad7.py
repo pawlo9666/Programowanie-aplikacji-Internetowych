@@ -1,4 +1,6 @@
-def funkcja(tekst):
-    print(tekst, '->', tekst[::-1])
+def obroc(tekst):
+    rtekst = tekst[::-1]
 
-funkcja("kotel")
+    return rtekst
+
+print(obroc("piesek"))
