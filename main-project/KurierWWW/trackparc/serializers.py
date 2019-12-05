@@ -26,11 +26,12 @@ class AdresSerializer(serializers.ModelSerializer):
         model = Adres
         fields = '__all__'
 
-        def validate_kodpocztowy(self, value):
-                pat = re.compile("[0-9][0-9]-[0-9][0-9][0-9]")
-                if not (re.search(pat , value)):
-                    raise serializers.ValidationError("Stary ten kod jest 2/10")
-                return value
+        # def validate_kodpocztowy(self, value):
+        #         pat = re.compile("[0-9][0-9]-[0-9][0-9][0-9]")
+        #         if not (re.search(pat, value)):
+        #             raise serializers.ValidationError("Stary ten kod jest 2/10")
+        #         return value
+
 
 class KlientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -43,15 +44,18 @@ class DaneKlientSerializer(serializers.ModelSerializer):
         model = DaneKlient
         fields = '__all__'
 
+
 class ZlecenieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Zlecenie
         fields = '__all__'
 
+
 class KierowcySerializer(serializers.ModelSerializer):
     class Meta:
         model = Kierowcy
         fields = '__all__'
+
 
 class PrzydzialSerializer(serializers.ModelSerializer):
     class Meta:

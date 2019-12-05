@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 
+
 class Adres(models.Model):
     idAdres = models.AutoField(primary_key=True)
     ulica = models.CharField(max_length=200)
@@ -10,7 +11,7 @@ class Adres(models.Model):
     miasto = models.CharField(max_length=45)
     poczta = models.CharField(max_length=45)
 
-    def __str__(self):
+    def __int__(self):
         return self.idAdres
 
 
@@ -19,7 +20,7 @@ class Klient(models.Model):
     idAdres = models.ForeignKey(Adres, on_delete=models.CASCADE)    # cascade zmienic
     idUser = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)    # dodałem klucz obcy do kont tworzonych w django
 
-    def __str__(self):
+    def __int__(self):
         return self.idKlient   # tutaj mozna chyba dodać jakoś fajnie żeby wywalałoz... nwm
 
 
@@ -44,7 +45,7 @@ class Zlecenie(models.Model):
     typPaczka = models.CharField(max_length=150)
     komentarz = models.TextField(max_length=500)
 
-    def __str__(self):
+    def __int__(self):
         return self.idPaczka
 
 
