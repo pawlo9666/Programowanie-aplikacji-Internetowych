@@ -1,3 +1,5 @@
 .idea/
 venv/
 main-project/env
+main-project/KurierWWW/trackparc/__pycache__/
+main-project/KurierWWW/__pycache__/
