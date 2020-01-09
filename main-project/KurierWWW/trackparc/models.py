@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 
+# owner = models.ForeignKey('auth.User' , related_name='questions' , on_delete=models.CASCADE)
 
 class Adres(models.Model):
     idAdres = models.AutoField(primary_key=True)
