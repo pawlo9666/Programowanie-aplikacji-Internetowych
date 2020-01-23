@@ -45,7 +45,7 @@ class Zlecenie(models.Model):
     stanZlecenie = models.CharField(max_length=150)
     typPaczka = models.CharField(max_length=150)
     komentarz = models.TextField(max_length=500)
-
+    owner = models.ForeignKey('auth.User', related_name='Zlecenie', on_delete=models.CASCADE)
 
     def __int__(self):
         return self.idPaczka
@@ -59,8 +59,8 @@ class Kierowcy(models.Model):
     dataBadanie = models.DateField()
 
 
+
 class Przydzial(models.Model):
     idPrzydzial = models.AutoField(primary_key=True)
     idPaczka = models.ForeignKey(Zlecenie, on_delete=models.CASCADE)
     idKierowcy = models.ForeignKey(Kierowcy, on_delete=models.CASCADE)
-

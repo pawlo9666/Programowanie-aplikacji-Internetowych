@@ -22,8 +22,10 @@ from django.contrib.auth.models import User
 
 
 class AdresSerializer(serializers.ModelSerializer):
+
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
-        owner = serializers.ReadOnlyField(source='owner.username')
         model = Adres
         fields = '__all__'
 
@@ -47,6 +49,9 @@ class DaneKlientSerializer(serializers.ModelSerializer):
 
 
 class ZlecenieSerializer(serializers.ModelSerializer):
+
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = Zlecenie
         fields = '__all__'
