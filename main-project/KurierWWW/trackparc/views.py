@@ -34,49 +34,62 @@ class AdresList(generics.ListCreateAPIView):
 class AdresDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Adres.objects.all()
     serializer_class = AdresSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
-class KlientList(generics.ListCreateAPIView):
-    queryset = Klient.objects.all()
-    serializer_class = AdresSerializer
-
-class KlientDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Klient.objects.all()
-    serializer_class = AdresSerializer
+# class KlientList(generics.ListCreateAPIView):
+#     queryset = Klient.objects.all()
+#     serializer_class = KlientSerializer
+#
+#
+# class KlientDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Klient.objects.all()
+#     serializer_class = KlientSerializer
 
 
 class DaneKlientList(generics.ListCreateAPIView):
     queryset = DaneKlient.objects.all()
-    serializer_class = AdresSerializer
+    serializer_class = DaneKlientSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class DaneKlientDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = DaneKlient.objects.all()
-    serializer_class = AdresSerializer
+    serializer_class = DaneKlientSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
 
 class KierowcyList(generics.ListCreateAPIView):
     queryset = Kierowcy.objects.all()
-    serializer_class = AdresSerializer
+    serializer_class = KierowcySerializer
+    permission_classes = [permissions.IsAdminUser]
 
 
 class KierowcyDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Kierowcy.objects.all()
-    serializer_class = AdresSerializer
+    serializer_class = KierowcySerializer
+    permission_classes = [permissions.IsAdminUser]
+
 
 class PrzydzialList(generics.ListCreateAPIView):
     queryset = Przydzial.objects.all()
-    serializer_class = AdresSerializer
+    serializer_class = PrzydzialSerializer
+    permission_classes = [permissions.IsAdminUser]
 
 
 class PrzydzialDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Przydzial.objects.all()
-    serializer_class = AdresSerializer
+    serializer_class = PrzydzialSerializer
+    permission_classes = [permissions.IsAdminUser]
+
 
 class ZlecenieList(generics.ListCreateAPIView):
     queryset = Zlecenie.objects.all()
     serializer_class = ZlecenieSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAdminUser]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -85,17 +98,19 @@ class ZlecenieList(generics.ListCreateAPIView):
 class ZlecenieDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Zlecenie.objects.all()
     serializer_class = ZlecenieSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrAdmin]
+
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [permissions.IsAdminUser]
+
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-
+    permission_classes = [IsUser]
 
 
 

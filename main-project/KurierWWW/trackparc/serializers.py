@@ -36,20 +36,21 @@ class AdresSerializer(serializers.ModelSerializer):
             return value
 
 
-class KlientSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Klient
-        fields = '__all__'
-
-
+# class KlientSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Klient
+#         fields = '__all__'
+#
+#
 class DaneKlientSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = DaneKlient
         fields = '__all__'
 
 
 class ZlecenieSerializer(serializers.ModelSerializer):
-
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
@@ -70,8 +71,10 @@ class PrzydzialSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    Adres = serializers.PrimaryKeyRelatedField(many=True,queryset=Adres.objects.all())
+    Adres = serializers.PrimaryKeyRelatedField(many=True, queryset=Adres.objects.all())
+    Zlecenie = serializers.PrimaryKeyRelatedField(many=True, queryset=Zlecenie.objects.all())
+    DaneKlient = serializers.PrimaryKeyRelatedField(many=True, queryset=DaneKlient.objects.all())
 
     class Meta:
-        model=User
-        fields = ['id','username','Adres']
+        model = User
+        fields = ['id', 'username', 'Adres', 'Zlecenie', 'DaneKlient']

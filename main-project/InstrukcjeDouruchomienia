@@ -6,7 +6,7 @@ stawianie virtuala jakoś trzeba igarnąć żeby był w folderze env
     cd main-project
     virtualenv env
 
-    \env\Scripts\activate.bat
+    env\Scripts\activate.bat
 
 urucamianie pipa (instalacja zapisanych pakietów):
     $pip install -r requirements.txt
@@ -18,7 +18,6 @@ PhpMyAdmin:
     (z małych)
 
 HSAŁO DO SUPERUSERA:
-
 L:admin
 H:root
 

@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 
+
 class Adres(models.Model):
     idAdres = models.AutoField(primary_key=True)
     ulica = models.CharField(max_length=200)
@@ -11,28 +12,27 @@ class Adres(models.Model):
     poczta = models.CharField(max_length=45)
     owner = models.ForeignKey('auth.User', related_name='Adres', on_delete=models.CASCADE)
 
-
     def __int__(self):
         return self.idAdres
 
 
-class Klient(models.Model):
-    idKlient = models.AutoField(primary_key=True)
-    idAdres = models.ForeignKey(Adres, on_delete=models.CASCADE)    # cascade zmienic
-
-    def __int__(self):
-        return self.idKlient   # tutaj mozna chyba dodać jakoś fajnie żeby wywalałoz... nwm
+# class Klient(models.Model):
+#     idKlient = models.AutoField(primary_key=True)
+#     idAdres = models.ForeignKey(Adres, on_delete=models.CASCADE)    # cascade zmienic
+#     owner = models.ForeignKey('auth.User', related_name='Adres', on_delete=models.CASCADE)
+#     def __int__(self):
+#         return self.idKlient   # tutaj mozna chyba dodać jakoś fajnie żeby wywalałoz... nwm
 
 
 class DaneKlient(models.Model):
     idDane = models.AutoField(primary_key=True)
-    idKlient = models.ForeignKey(Klient, on_delete=models.CASCADE)  #cascade zmienić
+    # idKlient = models.ForeignKey(Klient, on_delete=models.CASCADE)  #cascade zmienić
     typ = models.CharField(max_length=200)
     email = models.EmailField(max_length=254)
     nazwa = models.CharField(max_length=200)
     nip = models.CharField(max_length=200)
-    login = models.CharField(max_length=200)
-
+    # login = models.CharField(max_length=200)
+    owner = models.ForeignKey('auth.User', related_name='DaneKlient', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nazwa
@@ -57,7 +57,6 @@ class Kierowcy(models.Model):
     nazwisko = models.CharField(max_length=200)
     dataZatrudnienia = models.DateField(auto_now=True)
     dataBadanie = models.DateField()
-
 
 
 class Przydzial(models.Model):
