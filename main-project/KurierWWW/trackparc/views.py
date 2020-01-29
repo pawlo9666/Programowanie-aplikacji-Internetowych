@@ -1,11 +1,8 @@
 from django.shortcuts import render
 from rest_framework import status, generics
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.generics import RetrieveAPIView
-from .models import *
 from .serializers import *
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
+from .permissions import *
 
 
 def track(request):
@@ -28,11 +25,17 @@ def track(request):
 class AdresList(generics.ListCreateAPIView):
     queryset = Adres.objects.all()
     serializer_class = AdresSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class AdresDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Adres.objects.all()
     serializer_class = AdresSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
+
 
 class KlientList(generics.ListCreateAPIView):
     queryset = Klient.objects.all()
@@ -72,20 +75,26 @@ class PrzydzialDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class ZlecenieList(generics.ListCreateAPIView):
     queryset = Zlecenie.objects.all()
-    serializer_class = AdresSerializer
+    serializer_class = ZlecenieSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class ZlecenieDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Zlecenie.objects.all()
-    serializer_class = AdresSerializer
+    serializer_class = ZlecenieSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
 
-# class UserList(generics.ListAPIView):
-#     queryset = Zlecenie.objects.all()
-#     serializer_class = AdresSerializer
-#
-# class UserDetail(generics.RetrieveAPIView):
-#     queryset = Zlecenie.objects.all()
-#     serializer_class = AdresSerializer
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 
 
 

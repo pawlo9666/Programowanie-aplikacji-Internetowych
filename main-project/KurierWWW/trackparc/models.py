@@ -1,8 +1,6 @@
 from django.db import models
 from django.conf import settings
 
-# owner = models.ForeignKey('auth.User' , related_name='questions' , on_delete=models.CASCADE)
-
 class Adres(models.Model):
     idAdres = models.AutoField(primary_key=True)
     ulica = models.CharField(max_length=200)
@@ -11,6 +9,8 @@ class Adres(models.Model):
     kodpocztowy = models.CharField(max_length=6)
     miasto = models.CharField(max_length=45)
     poczta = models.CharField(max_length=45)
+    owner = models.ForeignKey('auth.User', related_name='Adres', on_delete=models.CASCADE)
+
 
     def __int__(self):
         return self.idAdres
@@ -19,7 +19,6 @@ class Adres(models.Model):
 class Klient(models.Model):
     idKlient = models.AutoField(primary_key=True)
     idAdres = models.ForeignKey(Adres, on_delete=models.CASCADE)    # cascade zmienic
-    idUser = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)    # dodałem klucz obcy do kont tworzonych w django
 
     def __int__(self):
         return self.idKlient   # tutaj mozna chyba dodać jakoś fajnie żeby wywalałoz... nwm
@@ -34,6 +33,7 @@ class DaneKlient(models.Model):
     nip = models.CharField(max_length=200)
     login = models.CharField(max_length=200)
 
+
     def __str__(self):
         return self.nazwa
 
@@ -45,6 +45,7 @@ class Zlecenie(models.Model):
     stanZlecenie = models.CharField(max_length=150)
     typPaczka = models.CharField(max_length=150)
     komentarz = models.TextField(max_length=500)
+    owner = models.ForeignKey('auth.User', related_name='Zlecenie', on_delete=models.CASCADE)
 
     def __int__(self):
         return self.idPaczka
@@ -56,6 +57,7 @@ class Kierowcy(models.Model):
     nazwisko = models.CharField(max_length=200)
     dataZatrudnienia = models.DateField(auto_now=True)
     dataBadanie = models.DateField()
+
 
 
 class Przydzial(models.Model):

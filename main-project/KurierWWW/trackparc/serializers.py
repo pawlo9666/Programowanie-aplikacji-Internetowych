@@ -1,7 +1,7 @@
 import re
 from rest_framework import serializers
 from .models import *
-# from django.contrib.auth.model import User
+from django.contrib.auth.models import User
 #
 # class Adres(serializers.Serializer):
 #         idAdres = serializers.IntegerField(primary_key=True)
@@ -22,6 +22,9 @@ from .models import *
 
 
 class AdresSerializer(serializers.ModelSerializer):
+
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = Adres
         fields = '__all__'
@@ -46,6 +49,9 @@ class DaneKlientSerializer(serializers.ModelSerializer):
 
 
 class ZlecenieSerializer(serializers.ModelSerializer):
+
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = Zlecenie
         fields = '__all__'
@@ -62,10 +68,10 @@ class PrzydzialSerializer(serializers.ModelSerializer):
         model = Przydzial
         fields = '__all__'
 
-#
-# class UserSerializer(serializers.ModelSerializer):
-#     questions = serializers.PrimaryKeyRelatedField(many=True , queryset=Question.objects.all())
-#
-#     class Maeta:
-#         model = User
-#         fields = ['id' , 'username' , 'questions']
+
+class UserSerializer(serializers.ModelSerializer):
+    Adres = serializers.PrimaryKeyRelatedField(many=True,queryset=Adres.objects.all())
+
+    class Meta:
+        model=User
+        fields = ['id','username','Adres']

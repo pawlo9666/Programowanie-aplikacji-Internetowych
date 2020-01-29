@@ -15,6 +15,9 @@ urlpatterns = [
     path('klient/<int:pk>/', views.KlientDetail.as_view()),
     path('daneklient/', views.DaneKlientList.as_view()),
     path('daneklient/<int:pk>/', views.DaneKlientDetail.as_view()),
-
+    path('users/', views.UserList.as_view()),
+    path('users/<int:pk>/', views.UserDetail.as_view()),
+    path('zlecenie/' , views.ZlecenieList.as_view()),
+    path('zlecenie/<int:pk>/' , views.ZlecenieDetail.as_view())
 
 ]
